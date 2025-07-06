@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Name - Portfolio</title>
+    <title>Irtaza Ahmed - Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         /* General Styling */
         :root {
@@ -21,10 +22,24 @@
             box-sizing: border-box;
             font-family: 'Poppins', sans-serif;
             color: var(--text-color);
+            scroll-behavior: smooth; /* This makes scrolling to sections smooth */
         }
 
         body {
             background-color: var(--bg-color);
+            animation: fadeInAnimation ease 1.5s;
+            animation-iteration-count: 1;
+            animation-fill-mode: forwards;
+        }
+
+        /* Fade-in Animation for smooth page load */
+        @keyframes fadeInAnimation {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+             }
         }
 
         /* Navigation */
@@ -56,11 +71,13 @@
             font-size: 18px;
             text-decoration: none;
             margin-left: 35px;
-            transition: color 0.3s ease;
+            color: var(--text-color);
+            transition: color 0.3s ease, text-shadow 0.3s ease; /* Added transition for glow */
         }
 
         .nav-links a:hover {
             color: var(--primary-color);
+            text-shadow: 0 0 10px var(--primary-color); /* Added glow on hover */
         }
 
         /* Home Section */
@@ -156,6 +173,16 @@
             box-shadow: 0 0 15px var(--primary-color);
         }
 
+        /* Keyframes for Multi-Color Glow */
+        @keyframes multiColorGlow {
+            0% { box-shadow: 0 0 15px #ff00ff; }
+            25% { box-shadow: 0 0 15px #00aaff; }
+            50% { box-shadow: 0 0 15px #00ff00; }
+            75% { box-shadow: 0 0 15px #ffff00; }
+            100% { box-shadow: 0 0 15px #ff00ff; }
+        }
+
+
         /* Skills Section */
         .skills {
             padding: 80px 10%;
@@ -175,12 +202,12 @@
             border-radius: 2rem;
             text-align: center;
             border: .2rem solid var(--bg-color);
-            transition: .5s ease;
+            transition: transform .5s ease;
         }
         
         .skill-box:hover{
-            border-color: var(--primary-color);
             transform: scale(1.02);
+            animation: multiColorGlow 4s infinite linear; /* Applied glow animation on hover */
         }
 
         .skill-box i {
@@ -197,7 +224,7 @@
             margin-top: 1rem;
         }
 
-        /* Projects Section */
+        /* --- Improved Projects Section --- */
         .projects {
             padding: 80px 10%;
             background: var(--secondary-bg-color);
@@ -205,102 +232,119 @@
 
         .projects-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 2rem;
         }
 
         .project-card {
-            position: relative;
+            background-color: var(--container-color);
             border-radius: 2rem;
             overflow: hidden;
             display: flex;
+            flex-direction: column;
+            transition: transform .5s ease, box-shadow .3s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+            animation: multiColorGlow 4s infinite linear;
         }
 
         .project-card img {
             width: 100%;
-            transition: .5s ease;
-        }
-        
-        .project-card:hover img{
-            transform: scale(1.1);
+            height: 200px;
+            object-fit: cover;
         }
 
-        .project-layer {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(rgba(0,0,0,0.3), var(--primary-color));
+        .project-content {
+            padding: 1.5rem;
             display: flex;
-            justify-content: center;
-            align-items: center;
             flex-direction: column;
-            text-align: center;
-            padding: 0 4rem;
-            transform: translateY(100%);
-            transition: .5s ease;
-        }
-        
-        .project-card:hover .project-layer{
-            transform: translateY(0);
+            flex-grow: 1; /* Allows content to fill space */
         }
 
-        .project-layer h4 {
-            font-size: 2rem;
+        .project-content h4 {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
         }
         
-        .project-layer p{
+        .project-content p {
             font-size: 1rem;
-            margin: .3rem 0 1rem;
+            margin-bottom: 1rem;
+            flex-grow: 1;
         }
 
-        /* Contact Section */
+        .project-content a {
+            display: inline-block;
+            align-self: flex-start; /* Aligns button to the left */
+            color: var(--bg-color);
+            background-color: var(--primary-color);
+            padding: 0.5rem 1.5rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .project-content a:hover {
+            background-color: var(--secondary-color);
+            color: var(--bg-color);
+        }
+
+
+        /* Updated Contact Section Styling */
         .contact {
             padding: 80px 10%;
-        }
-
-        .contact form {
-            max-width: 70rem;
-            margin: 1rem auto;
             text-align: center;
-            margin-bottom: 3rem;
         }
-
-        .contact form .input-box {
+        
+        .contact-info-container {
+            max-width: 800px;
+            margin: 40px auto;
             display: flex;
-            justify-content: space-between;
+            justify-content: space-around;
             flex-wrap: wrap;
+            gap: 20px;
         }
 
-        .contact form .input-box input,
-        .contact form textarea {
-            width: 100%;
-            padding: 1.5rem;
-            font-size: 1.6rem;
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .contact-info i {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            background-color: var(--secondary-bg-color);
+            padding: 20px;
+            border-radius: 50%;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .contact-info i:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px var(--primary-color);
+        }
+
+        .contact-info a, .contact-info p {
+            font-size: 1.2rem;
+            text-decoration: none;
             color: var(--text-color);
-            background: var(--secondary-bg-color);
-            border-radius: .8rem;
-            margin: .7rem 0;
-            border: 1px solid transparent;
+            transition: color 0.3s;
         }
-
-        .contact form .input-box input:focus,
-        .contact form textarea:focus {
-            outline: none;
-            border: 1px solid var(--primary-color);
-        }
-
-        .contact form .input-box input {
-            width: 49%;
+        
+        .contact-info a:hover {
+            color: var(--primary-color);
         }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
 
     <nav class="navbar">
-        <a href="#" class="logo">Portfolio.</a>
+        <a href="#home" class="logo">Portfolio.</a>
         <div class="nav-links">
             <a href="#home">Home</a>
             <a href="#about">About</a>
@@ -313,11 +357,11 @@
     <section class="home" id="home">
         <div class="home-content">
             <h3>Hello, It's Me</h3>
-            <h1>[Your Name]</h1>
-            <h3>And I'm a <span class="typed-text"></span></h3>
+            <h1>Irtaza Ahmed</h1>
+            <h3>And I'm an <span class="typed-text"></span></h3>
             <div class="home-social">
                 <a href="[Your LinkedIn URL]"><i class="fab fa-linkedin"></i></a>
-                <a href="[Your GitHub URL]"><i class="fab fa-github"></i></a>
+                <a href="https://github.com/irtaza-mcs"><i class="fab fa-github"></i></a>
                 <a href="[Your Twitter URL]"><i class="fab fa-twitter"></i></a>
             </div>
         </div>
@@ -327,7 +371,7 @@
         <h2 class="section-title">About <span>Me</span></h2>
         <div class="about-content">
             <p>
-                [Write a brief bio about yourself here. Talk about your passion for your field, your experience, and what drives you. Keep it engaging and professional.]
+                A passionate and dedicated Information Security Engineer based in Rawalpindi, Punjab, committed to safeguarding digital landscapes against evolving cyber threats. With a strong foundation in network security, ethical hacking, and cloud technologies, I strive to build resilient and secure systems. My goal is to continuously learn and apply cutting-edge security practices to protect valuable data and ensure the integrity of technological infrastructure.
             </p>
             <a href="[Link to Your Resume PDF]" class="btn">Download CV</a>
         </div>
@@ -339,71 +383,78 @@
             <div class="skill-box">
                 <i class="fas fa-code"></i>
                 <h3>Web Development</h3>
-                <p>[Describe your skills in web development here. Mention languages and frameworks like HTML, CSS, JavaScript, React, etc.]</p>
+                <p>Proficient in HTML, CSS, JavaScript, and experienced with modern front-end frameworks like React. Familiar with back-end technologies and database management.</p>
             </div>
             <div class="skill-box">
                 <i class="fas fa-shield-alt"></i>
                 <h3>Cyber Security</h3>
-                <p>[Describe your security skills. Mention things like Penetration Testing, Network Security, SIEM, etc.]</p>
+                <p>Expertise in penetration testing, vulnerability assessment, security auditing, incident response, and implementing security best practices across various systems.</p>
             </div>
             <div class="skill-box">
                 <i class="fas fa-cloud"></i>
                 <h3>Cloud Technologies</h3>
-                <p>[Describe your cloud skills. Mention platforms like AWS, Azure, or Google Cloud and relevant services.]</p>
+                <p>Hands-on experience with cloud platforms such as AWS and Azure, including deploying, managing, and securing cloud-based infrastructure and services.</p>
             </div>
         </div>
     </section>
-
 
     <section class="projects" id="projects">
         <h2 class="section-title" style="text-align: center;">Latest <span>Projects</span></h2>
         <div class="projects-container">
+
             <div class="project-card">
-                <img src="https://via.placeholder.com/300x300.png?text=Project+1" alt="Project 1">
-                <div class="project-layer">
-                    <h4>Project Title 1</h4>
-                    <p>A brief description of your project goes here.</p>
+                <img src="https://via.placeholder.com/400x200?text=Secure+Web+App" alt="Project 1">
+                <div class="project-content">
+                    <h4>Secure Web Application</h4>
+                    <p>Developed a full-stack web application with enhanced security features, including input sanitization, CSRF protection, and secure authentication to protect against common web vulnerabilities.</p>
+                    <a href="#">View Details</a>
                 </div>
             </div>
+
             <div class="project-card">
-                <img src="https://via.placeholder.com/300x300.png?text=Project+2" alt="Project 2">
-                <div class="project-layer">
-                    <h4>Project Title 2</h4>
-                    <p>A brief description of your project goes here.</p>
+                <img src="https://via.placeholder.com/400x200?text=Network+Security+Audit" alt="Project 2">
+                <div class="project-content">
+                    <h4>Network Security Audit</h4>
+                    <p>Conducted a comprehensive security audit for a corporate network. Identified and mitigated potential risks, configured firewalls, and implemented an Intrusion Detection System.</p>
+                    <a href="#">Read Case Study</a>
                 </div>
             </div>
+
             <div class="project-card">
-                <img src="https://via.placeholder.com/300x300.png?text=Project+3" alt="Project 3">
-                <div class="project-layer">
-                    <h4>Project Title 3</h4>
-                    <p>A brief description of your project goes here.</p>
+                <img src="https://via.placeholder.com/400x200?text=Cloud+Infrastructure" alt="Project 3">
+                <div class="project-content">
+                    <h4>Secure Cloud Deployment</h4>
+                    <p>Designed and deployed a scalable and secure infrastructure on AWS using Terraform. Implemented VPCs, security groups, and IAM roles following the principle of least privilege.</p>
+                    <a href="#">See on GitHub</a>
                 </div>
             </div>
+
         </div>
     </section>
 
     <section class="contact" id="contact">
-        <h2 class="section-title" style="text-align: center;">Contact <span>Me</span></h2>
-        <form action="#">
-            <div class="input-box">
-                <input type="text" placeholder="Full Name">
-                <input type="email" placeholder="Email Address">
+        <h2 class="section-title">Contact <span>Me</span></h2>
+        <div class="contact-info-container">
+            <div class="contact-info">
+                <i class="fas fa-envelope"></i>
+                <a href="mailto:your.email@example.com">your.email@example.com</a>
             </div>
-            <div class="input-box">
-                <input type="number" placeholder="Mobile Number">
-                <input type="text" placeholder="Email Subject">
+            <div class="contact-info">
+                <i class="fas fa-phone"></i>
+                <p>Your Phone Number</p>
             </div>
-            <textarea name="" id="" cols="30" rows="10" placeholder="Your Message"></textarea>
-            <input type="submit" value="Send Message" class="btn">
-        </form>
+            <div class="contact-info">
+                <i class="fas fa-map-marker-alt"></i>
+                <p>Rawalpindi, Punjab</p>
+            </div>
+        </div>
     </section>
-
 
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
     <script>
         // Typing effect
         var typed = new Typed('.typed-text', {
-            strings: ['Information Security Engineer', 'Web Developer', 'Ethical Hacker'],
+            strings: ['Information Security Engineer', 'Penetration Tester', 'Cloud Security Specialist'],
             typeSpeed: 70,
             backSpeed: 70,
             backDelay: 1000,
