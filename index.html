@@ -1,1 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Name - Portfolio</title>
+    <style>
+        /* General Styling */
+        :root {
+            --bg-color: #121212;
+            --secondary-bg-color: #1e1e1e;
+            --text-color: #e0e0e0;
+            --primary-color: #03dac6;
+            --secondary-color: #bb86fc;
+            --container-color: #2c2c2c;
+        }
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-color);
+        }
+
+        body {
+            background-color: var(--bg-color);
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            width: 100%;
+            padding: 20px 10%;
+            background: transparent;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            transition: background 0.3s ease;
+        }
+
+        .navbar.sticky {
+            background: var(--secondary-bg-color);
+            border-bottom: 1px solid var(--container-color);
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: 600;
+            text-decoration: none;
+            color: var(--primary-color);
+        }
+
+        .nav-links a {
+            font-size: 18px;
+            text-decoration: none;
+            margin-left: 35px;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Home Section */
+        .home {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 10%;
+        }
+
+        .home-content h3 {
+            font-size: 32px;
+            font-weight: 700;
+        }
+
+        .home-content h1 {
+            font-size: 56px;
+            font-weight: 700;
+            margin: -3px 0;
+        }
+
+        .home-content h3:nth-of-type(2) {
+            margin-bottom: 30px;
+        }
+
+        .home-content h3 span {
+            color: var(--primary-color);
+        }
+
+        .home-social a {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            border-radius: 50%;
+            font-size: 20px;
+            color: var(--primary-color);
+            text-decoration: none;
+            margin: 30px 15px 30px 0;
+            transition: .5s ease;
+        }
+
+        .home-social a:hover {
+            background: var(--primary-color);
+            color: var(--bg-color);
+            box-shadow: 0 0 20px var(--primary-color);
+        }
+
+        /* About Section */
+        .about {
+            padding: 80px 10%;
+            background-color: var(--secondary-bg-color);
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 36px;
+            margin-bottom: 40px;
+        }
+        
+        .section-title span {
+            color: var(--primary-color);
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .about-content p {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            background: var(--primary-color);
+            border-radius: 40px;
+            font-size: 16px;
+            color: var(--bg-color);
+            letter-spacing: 1px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: box-shadow .5s ease;
+        }
+
+        .btn:hover {
+            box-shadow: 0 0 15px var(--primary-color);
+        }
+
+        /* Skills Section */
+        .skills {
+            padding: 80px 10%;
+        }
+
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+
+        .skill-box {
+            flex: 1 1 30rem;
+            background: var(--secondary-bg-color);
+            padding: 3rem 2rem 4rem;
+            border-radius: 2rem;
+            text-align: center;
+            border: .2rem solid var(--bg-color);
+            transition: .5s ease;
+        }
+        
+        .skill-box:hover{
+            border-color: var(--primary-color);
+            transform: scale(1.02);
+        }
+
+        .skill-box i {
+            font-size: 5rem;
+            color: var(--primary-color);
+        }
+
+        .skill-box h3 {
+            font-size: 2.6rem;
+            margin-top: 1rem;
+        }
+        
+        .skill-box p{
+            margin-top: 1rem;
+        }
+
+        /* Projects Section */
+        .projects {
+            padding: 80px 10%;
+            background: var(--secondary-bg-color);
+        }
+
+        .projects-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            position: relative;
+            border-radius: 2rem;
+            overflow: hidden;
+            display: flex;
+        }
+
+        .project-card img {
+            width: 100%;
+            transition: .5s ease;
+        }
+        
+        .project-card:hover img{
+            transform: scale(1.1);
+        }
+
+        .project-layer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0,0,0,0.3), var(--primary-color));
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            padding: 0 4rem;
+            transform: translateY(100%);
+            transition: .5s ease;
+        }
+        
+        .project-card:hover .project-layer{
+            transform: translateY(0);
+        }
+
+        .project-layer h4 {
+            font-size: 2rem;
+        }
+        
+        .project-layer p{
+            font-size: 1rem;
+            margin: .3rem 0 1rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 80px 10%;
+        }
+
+        .contact form {
+            max-width: 70rem;
+            margin: 1rem auto;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .contact form .input-box {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .contact form .input-box input,
+        .contact form textarea {
+            width: 100%;
+            padding: 1.5rem;
+            font-size: 1.6rem;
+            color: var(--text-color);
+            background: var(--secondary-bg-color);
+            border-radius: .8rem;
+            margin: .7rem 0;
+            border: 1px solid transparent;
+        }
+
+        .contact form .input-box input:focus,
+        .contact form textarea:focus {
+            outline: none;
+            border: 1px solid var(--primary-color);
+        }
+
+        .contact form .input-box input {
+            width: 49%;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="#" class="logo">Portfolio.</a>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <section class="home" id="home">
+        <div class="home-content">
+            <h3>Hello, It's Me</h3>
+            <h1>[Your Name]</h1>
+            <h3>And I'm a <span class="typed-text"></span></h3>
+            <div class="home-social">
+                <a href="[Your LinkedIn URL]"><i class="fab fa-linkedin"></i></a>
+                <a href="[Your GitHub URL]"><i class="fab fa-github"></i></a>
+                <a href="[Your Twitter URL]"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <section class="about" id="about">
+        <h2 class="section-title">About <span>Me</span></h2>
+        <div class="about-content">
+            <p>
+                [Write a brief bio about yourself here. Talk about your passion for your field, your experience, and what drives you. Keep it engaging and professional.]
+            </p>
+            <a href="[Link to Your Resume PDF]" class="btn">Download CV</a>
+        </div>
+    </section>
+    
+    <section class="skills" id="skills">
+        <h2 class="section-title" style="text-align: center;">My <span>Skills</span></h2>
+        <div class="skills-container">
+            <div class="skill-box">
+                <i class="fas fa-code"></i>
+                <h3>Web Development</h3>
+                <p>[Describe your skills in web development here. Mention languages and frameworks like HTML, CSS, JavaScript, React, etc.]</p>
+            </div>
+            <div class="skill-box">
+                <i class="fas fa-shield-alt"></i>
+                <h3>Cyber Security</h3>
+                <p>[Describe your security skills. Mention things like Penetration Testing, Network Security, SIEM, etc.]</p>
+            </div>
+            <div class="skill-box">
+                <i class="fas fa-cloud"></i>
+                <h3>Cloud Technologies</h3>
+                <p>[Describe your cloud skills. Mention platforms like AWS, Azure, or Google Cloud and relevant services.]</p>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="projects" id="projects">
+        <h2 class="section-title" style="text-align: center;">Latest <span>Projects</span></h2>
+        <div class="projects-container">
+            <div class="project-card">
+                <img src="https://via.placeholder.com/300x300.png?text=Project+1" alt="Project 1">
+                <div class="project-layer">
+                    <h4>Project Title 1</h4>
+                    <p>A brief description of your project goes here.</p>
+                </div>
+            </div>
+            <div class="project-card">
+                <img src="https://via.placeholder.com/300x300.png?text=Project+2" alt="Project 2">
+                <div class="project-layer">
+                    <h4>Project Title 2</h4>
+                    <p>A brief description of your project goes here.</p>
+                </div>
+            </div>
+            <div class="project-card">
+                <img src="https://via.placeholder.com/300x300.png?text=Project+3" alt="Project 3">
+                <div class="project-layer">
+                    <h4>Project Title 3</h4>
+                    <p>A brief description of your project goes here.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <h2 class="section-title" style="text-align: center;">Contact <span>Me</span></h2>
+        <form action="#">
+            <div class="input-box">
+                <input type="text" placeholder="Full Name">
+                <input type="email" placeholder="Email Address">
+            </div>
+            <div class="input-box">
+                <input type="number" placeholder="Mobile Number">
+                <input type="text" placeholder="Email Subject">
+            </div>
+            <textarea name="" id="" cols="30" rows="10" placeholder="Your Message"></textarea>
+            <input type="submit" value="Send Message" class="btn">
+        </form>
+    </section>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <script>
+        // Typing effect
+        var typed = new Typed('.typed-text', {
+            strings: ['Information Security Engineer', 'Web Developer', 'Ethical Hacker'],
+            typeSpeed: 70,
+            backSpeed: 70,
+            backDelay: 1000,
+            loop: true
+        });
+
+        // Sticky Navbar
+        window.addEventListener('scroll', function() {
+            var navbar = document.querySelector('.navbar');
+            navbar.classList.toggle('sticky', window.scrollY > 0);
+        });
+    </script>
+</body>
+</html>
